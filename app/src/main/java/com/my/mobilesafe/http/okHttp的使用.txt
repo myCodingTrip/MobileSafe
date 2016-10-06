@@ -1,0 +1,39 @@
+HttpURLConnection 要写很多代码，非常繁琐
+HTTP Client 较繁琐
+Volley
+okHttp取代Volley
+okHttp是一个高效的http库
+
+OkHttpClient 客户端对象
+Request OkHttp中访问的请求
+Builder 构建Request的辅助类
+Response OkHttp中访问的响应
+
+
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder().url(url).build();
+client.newCall(request).enqueue(new Callback() {
+    @Override
+    public void onFailure(Request request, IOException e) {
+        Toast.makeText(getActivity(), "无网络连接", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResponse(Response response) throws IOException {
+        if(response.isSuccessful()){
+            String json = response.body().string();
+            //Log.i("Home", "json="+json);
+            Type type = new TypeToken<List<Banner>>(){}.getType();
+            banners = gson.fromJson(json, type);
+            //onResponse执行的线程并不是UI线程，如果你希望操作控件，还是需要使用handler等
+            getActivity().runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    initSlider();
+                }
+            });
+        }
+    }
+});
