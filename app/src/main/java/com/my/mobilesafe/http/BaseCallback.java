@@ -29,8 +29,12 @@ public abstract class BaseCallback<T> {
     }
 
     public abstract void onRequestBefore(Request request);
+
     public abstract void onResponse(Response response);
+    //无网络
     public abstract void onFailure(Request request, Exception e);
+
     public abstract void onSuccess(Response response, T t);
+    //服务器端返回错误码
     public abstract void onError(Response response, int code, Exception e);
 }

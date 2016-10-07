@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">手机卫士</string>
+    <string name="hint_input_password">请输入密码</string>
+    <string name="hint_confirm_password">请再次输入密码</string>
+    <string name="btn_ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="tv_please_set_password">请设置密码</string>
+    <string name="tv_please_input_password">请输入密码</string>
 </resources>

@@ -9,19 +9,19 @@ import android.widget.TextView;
  * 实现跑马灯效果
  */
 
-public class MyTextView extends TextView {
+public class FocusedTextView extends TextView {
     //直接 new TextView(this)
-    public MyTextView(Context context) {
+    public FocusedTextView(Context context) {
         super(context);
     }
 
     //<TextView android:..../>
-    public MyTextView(Context context, AttributeSet attrs) {
+    public FocusedTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     //<TextView android:.... style=""/>
-    public MyTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public FocusedTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -37,7 +37,7 @@ import butterknife.InjectView;
 /**
  * Created by MY on 2016/10/4.
  */
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
 
     @InjectView(R.id.tv_version)
     TextView tvVersion;
@@ -47,7 +47,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_splash);
         ButterKnife.inject(this);
 

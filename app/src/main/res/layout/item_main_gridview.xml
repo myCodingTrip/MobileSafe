@@ -9,7 +9,7 @@
         android:id="@+id/iv_grid_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/app"/>
+        android:background="@mipmap/app"/>
 
     <TextView
         android:id="@+id/tv_grid_item"

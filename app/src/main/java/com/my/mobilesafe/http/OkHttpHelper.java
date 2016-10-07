@@ -83,23 +83,28 @@ public class OkHttpHelper {
             @Override
             public void onResponse(Response response) throws IOException {
                 callback.onResponse(response);
-                if(response.isSuccessful()){
-                    String result = response.body().string();
-                    try {
-                        if (callback.type == String.class){
-                            callbackSuccess(callback, response, result);
-                        }else {
-                            Object object = gson.fromJson(result, callback.type);
-                            callbackSuccess(callback, response, object);
-                        }
-                    } catch (JsonSyntaxException e) {
-                        callbackError(callback, response, null);
-                    }
-                }else {
-                    callbackError(callback, response, null);
-                }
+                parseResponse(response, callback);
             }
         });
+    }
+
+    private void parseResponse(Response response, BaseCallback callback) throws IOException {
+        //code >= 200 && code < 300
+        if(response.isSuccessful()){
+            String result = response.body().string();
+            try {
+                if (callback.type == String.class){
+                    callbackSuccess(callback, response, result);
+                }else {
+                    Object object = gson.fromJson(result, callback.type);
+                    callbackSuccess(callback, response, object);
+                }
+            } catch (JsonSyntaxException e) {
+                callbackError(callback, response, null);
+            }
+        }else {
+            callbackError(callback, response, null);
+        }
     }
 
     private void callbackSuccess(final BaseCallback callback, final Response response, final Object object){
