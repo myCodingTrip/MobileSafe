@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
+import com.my.mobilesafe.activity.lost.LostFoundActivity;
+import com.my.mobilesafe.activity.setting.SettingCenterActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,7 +30,7 @@ public class MainActivity extends BaseActivity {
 
         GridViewAdapter gridViewAdapter = new GridViewAdapter();
         gridView.setAdapter(gridViewAdapter);
-        gridView.setOnItemClickListener(new MyItemClickListener());
+        gridView.setOnItemClickListener(new GridItemClickListener());
     }
 
     private class GridViewAdapter extends BaseAdapter{
@@ -69,7 +71,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private class MyItemClickListener implements AdapterView.OnItemClickListener {
+    //TODO  设置按下效果
+    private class GridItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (position){
@@ -99,7 +102,8 @@ public class MainActivity extends BaseActivity {
 
                     break;
                 case 8:
-
+                    Intent settingIntent = new Intent(getApplicationContext(), SettingCenterActivity.class);
+                    startActivity(settingIntent);
                     break;
             }
         }

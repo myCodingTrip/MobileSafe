@@ -7,14 +7,11 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#66FF00"
-        android:gravity="center"
-        android:textSize="22sp"
-        android:text="主界面"/>
+        style="@style/activity_title_style"
+        android:text="@string/tv_main_ui"/>
 
     <!--这里不可以替换成 android:maxLines="1"-->
-    <com.my.mobilesafe.ui.FocusedTextView
+    <com.my.mobilesafe.widget.FocusedTextView
         android:id="@+id/tv_marquee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

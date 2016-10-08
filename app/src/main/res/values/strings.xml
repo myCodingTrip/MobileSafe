@@ -6,4 +6,8 @@
     <string name="btn_cancel">取消</string>
     <string name="tv_please_set_password">请设置密码</string>
     <string name="tv_please_input_password">请输入密码</string>
+    <string name="tv_setting_center">设置中心</string>
+    <string name="tv_main_ui">主界面</string>
+    <string name="tv_auto_update_open">自动更新已开启</string>
+    <string name="tv_auto_update_closed">自动更新未开启</string>
 </resources>

@@ -1,19 +1,19 @@
 package com.my.mobilesafe.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
-import android.view.Window;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
+import com.my.mobilesafe.activity.setting.SettingCenterActivity;
 import com.my.mobilesafe.domain.UpdateInfo;
 import com.my.mobilesafe.http.OkHttpHelper;
 import com.my.mobilesafe.http.SpotsCallBack;
@@ -43,7 +43,7 @@ public class SplashActivity extends BaseActivity {
     TextView tvVersion;
     public static final String LOG_TAG = "MobileSafe";
     private String versionName;
-
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,11 @@ public class SplashActivity extends BaseActivity {
         versionName = getVersionName();
         if(versionName != null)
             tvVersion.setText("版本号：" + versionName);
-
-        //checkNewVersion();
+        sp = getSharedPreferences("config", MODE_PRIVATE);
+        boolean isAutoUpdate = sp.getBoolean(SettingCenterActivity.IS_AUTO_UPDATE, true);
+        if (isAutoUpdate){
+            //checkNewVersion();
+        }
         loadMainActivity();
     }
 

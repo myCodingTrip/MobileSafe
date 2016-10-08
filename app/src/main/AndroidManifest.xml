@@ -22,9 +22,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <!--透明背景-->
-        <activity android:name=".activity.LostFoundActivity"
-            android:theme="@android:style/Theme.Translucent"/>
+        <!-- 透明背景 -->
+        <activity
+            android:name=".activity.lost.LostFoundActivity"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity android:name=".activity.setting.SettingCenterActivity" />
+        <activity android:name=".activity.lost.SetGuideActivity"></activity>
     </application>
 
 </manifest>

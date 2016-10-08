@@ -1,4 +1,4 @@
-package com.my.mobilesafe.ui;
+package com.my.mobilesafe.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,7 +1,8 @@
-package com.my.mobilesafe.activity;
+package com.my.mobilesafe.activity.lost;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.my.mobilesafe.R;
+import com.my.mobilesafe.activity.BaseActivity;
 import com.my.mobilesafe.utils.ToastUtil;
 
 
@@ -90,7 +92,8 @@ public class LostFoundActivity extends BaseActivity {
                 if (TextUtils.isEmpty(inputPassword)){
                     ToastUtil.show(getApplicationContext(), "密码不能为空");
                 }else if(inputPassword.equals(password)){
-                    ;
+                    Intent intent = new Intent(getApplicationContext(), SetGuideActivity.class);
+                    startActivity(intent);
                     dialog.dismiss();
                     finish();
                 }else {
