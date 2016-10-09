@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/activity_title_style"
+        android:text="3.设置安全号码" />
+
+    <ImageView style="@style/divide_line_style" />
+
+    <TextView
+        style="@style/tv_content_style"
+        android:layout_marginTop="8dip"
+        android:text="SIM卡更换后会把报警短信,发送到该号码上" />
+
+    <EditText
+        android:id="@+id/et_safe_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入或者选择安全手机号码" />
+
+    <Button
+        android:id="@+id/btn_select_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_btn_bind_sim"
+        android:textSize="18sp"
+        android:text="选择联系人" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/phone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_previous"
+            style="@style/btn_previous" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView style="@style/img_presence_presence_invisible_style" />
+
+            <ImageView style="@style/img_presence_online_style" />
+
+            <ImageView style="@style/img_presence_presence_invisible_style" />
+
+            <ImageView style="@style/img_presence_presence_invisible_style" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/btn_next" />
+    </RelativeLayout>
+
+</LinearLayout>

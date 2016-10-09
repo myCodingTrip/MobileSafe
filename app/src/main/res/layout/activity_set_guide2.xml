@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/activity_title_style"
+        android:text="2.手机卡绑定" />
+
+    <ImageView style="@style/divide_line_style" />
+
+    <TextView
+        style="@style/tv_content_style"
+        android:layout_marginTop="8dip"
+        android:text="如果sim绑定\n下次重启手机如果sim变更\n就会发送报警短信" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_bind_sim"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="点击绑定SIM卡"
+            android:background="@drawable/shape_btn_bind_sim"/>
+        <ImageView
+            android:id="@+id/img_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/lock"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:src="@mipmap/bind"
+        android:id="@+id/imageView" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_previous"
+            style="@style/btn_previous" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView style="@style/img_presence_presence_invisible_style" />
+
+            <ImageView style="@style/img_presence_online_style" />
+
+            <ImageView style="@style/img_presence_presence_invisible_style" />
+
+            <ImageView style="@style/img_presence_presence_invisible_style" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/btn_next" />
+    </RelativeLayout>
+
+</LinearLayout>

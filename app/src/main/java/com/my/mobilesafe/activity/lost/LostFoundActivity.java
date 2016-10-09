@@ -92,7 +92,7 @@ public class LostFoundActivity extends BaseActivity {
                 if (TextUtils.isEmpty(inputPassword)){
                     ToastUtil.show(getApplicationContext(), "密码不能为空");
                 }else if(inputPassword.equals(password)){
-                    Intent intent = new Intent(getApplicationContext(), SetGuideActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SetGuideActivity1.class);
                     startActivity(intent);
                     dialog.dismiss();
                     finish();

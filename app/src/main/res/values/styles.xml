@@ -11,14 +11,57 @@
     <style name="activity_title_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">40dp</item>
-        <item name="android:background">#66FF00</item>
+        <item name="android:background">#000000</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">22sp</item>
     </style>
 
-    <style name="tv_style">
+    <style name="tv_content_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="img_start_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@android:drawable/star_big_on</item>
+    </style>
+
+    <style name="img_presence_online_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@android:drawable/presence_online</item>
+    </style>
+
+    <style name="img_presence_presence_invisible_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@android:drawable/presence_invisible</item>
+    </style>
+
+    <style name="btn_next">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:drawableRight">@mipmap/next</item>
+        <item name="android:text">下一步</item>
+    </style>
+
+    <style name="btn_previous">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:drawableLeft">@mipmap/previous</item>
+        <item name="android:text">上一步</item>
+    </style>
+
+    <style name="divide_line_style">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@mipmap/divide_line</item>
+    </style>
+
+
 </resources>
