@@ -31,6 +31,7 @@ public class SetGuideActivity3 extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_select_contact:
+                getContact();
                 break;
             case R.id.btn_previous:
                 startActivity(new Intent(this, SetGuideActivity2.class));
@@ -38,6 +39,21 @@ public class SetGuideActivity3 extends BaseActivity {
                 break;
             case R.id.btn_next:
                 break;
+        }
+    }
+
+    private void getContact() {
+        Intent intent = new Intent(this, ContactListActivity.class);
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100 && resultCode == 200){
+            String number = data.getStringExtra(ContactListActivity.NUMBER).trim();
+            etSafeNumber.setText(number);
+            etSafeNumber.setSelection(number.length());
         }
     }
 }

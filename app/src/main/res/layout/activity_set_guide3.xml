@@ -47,13 +47,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal" >
-
             <ImageView style="@style/img_presence_presence_invisible_style" />
-
+            <ImageView style="@style/img_presence_presence_invisible_style" />
             <ImageView style="@style/img_presence_online_style" />
-
-            <ImageView style="@style/img_presence_presence_invisible_style" />
-
             <ImageView style="@style/img_presence_presence_invisible_style" />
         </LinearLayout>
         <Button
