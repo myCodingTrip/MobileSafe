@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.setting.SettingCenterActivity;
-import com.my.mobilesafe.domain.UpdateInfo;
+import com.my.mobilesafe.bean.UpdateInfo;
 import com.my.mobilesafe.http.OkHttpHelper;
 import com.my.mobilesafe.http.SpotsCallBack;
 import com.my.mobilesafe.utils.FileUtils;

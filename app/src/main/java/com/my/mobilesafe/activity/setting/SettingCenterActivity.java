@@ -20,6 +20,7 @@ public class SettingCenterActivity extends BaseActivity {
     CheckBox cbUpdateSetting;
     SharedPreferences sp;
     public static final String IS_AUTO_UPDATE = "isAutoUpdate";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

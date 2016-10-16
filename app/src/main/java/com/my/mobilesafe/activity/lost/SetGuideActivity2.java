@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
+import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.utils.ToastUtil;
 
 import butterknife.ButterKnife;
@@ -20,7 +21,6 @@ import butterknife.OnClick;
 
 public class SetGuideActivity2 extends BaseActivity {
     SharedPreferences sp;
-    public static final String SIM_SERIAL_NUM = "SIM_SERIAL_NUM";
     boolean hasBind = true;
     @InjectView(R.id.btn_bind_sim)
     Button btnBindSim;
@@ -35,7 +35,7 @@ public class SetGuideActivity2 extends BaseActivity {
 
         imgLock.bringToFront();
         sp = getSharedPreferences("config", MODE_PRIVATE);
-        String simSerialNum = sp.getString(SIM_SERIAL_NUM, null);
+        String simSerialNum = sp.getString(SharedKey.SIM_SERIAL_NUM, null);
         if (TextUtils.isEmpty(simSerialNum)) {
             hasBind = false;
         }
@@ -52,7 +52,7 @@ public class SetGuideActivity2 extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_bind_sim, R.id.btn_previous, R.id.btn_next})
+    @OnClick({R.id.btn_bind_sim, R.id.btn_previous, R.id.btn_finish})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bind_sim:
@@ -63,7 +63,7 @@ public class SetGuideActivity2 extends BaseActivity {
                 startActivity(new Intent(this, SetGuideActivity1.class));
                 finish();
                 break;
-            case R.id.btn_next:
+            case R.id.btn_finish:
                 startActivity(new Intent(this, SetGuideActivity3.class));
                 finish();
                 break;
@@ -78,7 +78,7 @@ public class SetGuideActivity2 extends BaseActivity {
             return;
         }
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString(SIM_SERIAL_NUM, simSerialNum);
+        editor.putString(SharedKey.SIM_SERIAL_NUM, simSerialNum);
         editor.commit();
         hasBind = true;
         updateBtnView();
@@ -86,7 +86,7 @@ public class SetGuideActivity2 extends BaseActivity {
 
     private void unbindSim() {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString(SIM_SERIAL_NUM, null);
+        editor.putString(SharedKey.SIM_SERIAL_NUM, null);
         editor.commit();
         hasBind = false;
         updateBtnView();

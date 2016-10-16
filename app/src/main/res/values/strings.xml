@@ -10,4 +10,5 @@
     <string name="tv_main_ui">主界面</string>
     <string name="tv_auto_update_open">自动更新已开启</string>
     <string name="tv_auto_update_closed">自动更新未开启</string>
+    <string name="tv_sate_num">安全手机号码:</string>
 </resources>

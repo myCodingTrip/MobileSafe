@@ -86,7 +86,7 @@
                 style="@style/img_presence_presence_invisible_style"/>
         </LinearLayout>
         <Button
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_finish"
             style="@style/btn_next" />
     </RelativeLayout>
 </LinearLayout>

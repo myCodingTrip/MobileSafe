@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
-import com.my.mobilesafe.domain.ContactPerson;
+import com.my.mobilesafe.bean.ContactPerson;
 import com.my.mobilesafe.engine.ContactInfoEngine;
 
 import java.util.List;

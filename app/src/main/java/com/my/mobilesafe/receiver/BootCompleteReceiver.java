@@ -8,10 +8,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.my.mobilesafe.utils.ToastUtil;
-
 import static android.content.Context.MODE_PRIVATE;
-import static com.my.mobilesafe.activity.lost.SetGuideActivity2.SIM_SERIAL_NUM;
+import static com.my.mobilesafe.constant.SharedKey.SIM_SERIAL_NUM;
 
 /**
  * Created by MY on 2016/10/9.

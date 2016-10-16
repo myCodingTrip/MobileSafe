@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
-import com.my.mobilesafe.domain.ContactPerson;
+import com.my.mobilesafe.bean.ContactPerson;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.my.mobilesafe.domain;
+package com.my.mobilesafe.bean;
 
 /**
  * Created by MY on 2016/10/5.
