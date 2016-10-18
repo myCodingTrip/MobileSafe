@@ -5,11 +5,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 
 import com.my.mobilesafe.R;
+import com.my.mobilesafe.activity.BaseActivity;
 import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.receiver.MyAdmin;
 
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class SetGuideActivity4 extends AppCompatActivity {
+public class SetGuideActivity4 extends BaseActivity {
 
     @InjectView(R.id.cb_is_protecting)
     CheckBox cbIsProtecting;
@@ -36,7 +36,7 @@ public class SetGuideActivity4 extends AppCompatActivity {
         setCbText();
     }
 
-    @OnClick({R.id.cb_is_protecting, R.id.btn_previous, R.id.btn_finish})
+    @OnClick({R.id.cb_is_protecting, R.id.btn_previous, R.id.btn_next})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cb_is_protecting:
@@ -46,8 +46,9 @@ public class SetGuideActivity4 extends AppCompatActivity {
             case R.id.btn_previous:
                 startActivity(new Intent(this, SetGuideActivity3.class));
                 finish();
+                overridePendingTransition(R.anim.pre_in, R.anim.pre_out);
                 break;
-            case R.id.btn_finish:
+            case R.id.btn_next:
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean(SharedKey.IS_PROTECT_OPEN, isProtect);
                 editor.putBoolean(SharedKey.SETTING_FINISH, true);

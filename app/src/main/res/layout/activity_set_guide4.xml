@@ -43,7 +43,7 @@
             <ImageView style="@style/img_presence_online_style" />
         </LinearLayout>
         <Button
-            android:id="@+id/btn_finish"
+            android:id="@+id/btn_next"
             style="@style/btn_next"
             android:text="设置完成"/>
     </RelativeLayout>

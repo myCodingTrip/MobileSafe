@@ -15,6 +15,7 @@ import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.lost.LostFoundActivity;
 import com.my.mobilesafe.activity.lost.ProtectInfoActivity;
 import com.my.mobilesafe.activity.setting.SettingCenterActivity;
+import com.my.mobilesafe.activity.tool.ToolActivity;
 import com.my.mobilesafe.bean.MainItem;
 import com.my.mobilesafe.constant.SharedKey;
 
@@ -123,7 +124,7 @@ public class MainActivity extends BaseActivity {
 
                     break;
                 case 7:
-
+                    startActivity(new Intent(getApplicationContext(), ToolActivity.class));
                     break;
                 case 8:
                     Intent settingIntent = new Intent(getApplicationContext(), SettingCenterActivity.class);

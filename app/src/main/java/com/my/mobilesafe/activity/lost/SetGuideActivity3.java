@@ -39,7 +39,7 @@ public class SetGuideActivity3 extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_select_contact, R.id.btn_previous, R.id.btn_finish})
+    @OnClick({R.id.btn_select_contact, R.id.btn_previous, R.id.btn_next})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_select_contact:
@@ -48,8 +48,9 @@ public class SetGuideActivity3 extends BaseActivity {
             case R.id.btn_previous:
                 startActivity(new Intent(this, SetGuideActivity2.class));
                 finish();
+                overridePendingTransition(R.anim.pre_in, R.anim.pre_out);
                 break;
-            case R.id.btn_finish:
+            case R.id.btn_next:
                 String number = etSafeNumber.getText().toString();
                 if (!RegexUtil.isMobileNum(number)){
                     ToastUtil.show(this, "请输入正确的手机号");
@@ -59,6 +60,7 @@ public class SetGuideActivity3 extends BaseActivity {
                     editor.commit();
                     startActivity(new Intent(this, SetGuideActivity4.class));
                     finish();
+
                 }
                 break;
         }

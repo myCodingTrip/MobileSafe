@@ -13,7 +13,7 @@ import butterknife.OnClick;
 
 public class SetGuideActivity1 extends BaseActivity {
 
-    @InjectView(R.id.btn_finish)
+    @InjectView(R.id.btn_next)
     Button btnNext;
 
     @Override
@@ -23,10 +23,11 @@ public class SetGuideActivity1 extends BaseActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick(R.id.btn_finish)
+    @OnClick(R.id.btn_next)
     public void onClick() {
         Intent intent = new Intent(this, SetGuideActivity2.class);
         startActivity(intent);
         finish();
+
     }
 }

@@ -52,7 +52,7 @@ public class SetGuideActivity2 extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_bind_sim, R.id.btn_previous, R.id.btn_finish})
+    @OnClick({R.id.btn_bind_sim, R.id.btn_previous, R.id.btn_next})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bind_sim:
@@ -62,8 +62,9 @@ public class SetGuideActivity2 extends BaseActivity {
             case R.id.btn_previous:
                 startActivity(new Intent(this, SetGuideActivity1.class));
                 finish();
+                overridePendingTransition(R.anim.pre_in, R.anim.pre_out);
                 break;
-            case R.id.btn_finish:
+            case R.id.btn_next:
                 startActivity(new Intent(this, SetGuideActivity3.class));
                 finish();
                 break;

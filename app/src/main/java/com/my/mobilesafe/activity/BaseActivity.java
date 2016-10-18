@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.my.mobilesafe.R;
+
 /**
  * Created by MY on 2016/10/7.
  */

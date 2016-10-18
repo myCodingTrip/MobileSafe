@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -20,6 +19,7 @@
     <!-- <uses-permission android:name="android.permission.WRITE_CONTACTS" /> -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
     <!-- <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/> -->
     <application
@@ -46,6 +46,11 @@
         <activity android:name=".activity.lost.ContactListActivity" />
         <activity android:name=".activity.lost.SetGuideActivity4" />
         <activity android:name=".activity.lost.ProtectInfoActivity" />
+        <activity android:name=".activity.tool.ToolActivity" />
+        <activity android:name=".activity.tool.AddressQueryActivity" />
+        <activity android:name=".activity.TestActivity">
+
+        </activity>
 
         <receiver android:name=".receiver.BootCompleteReceiver">
             <intent-filter android:priority="1000">
@@ -60,12 +65,12 @@
         <receiver android:name=".receiver.MyAdmin">
             <meta-data
                 android:name="android.app.device_admin"
-                android:resource="@xml/my_admin" />\
+                android:resource="@xml/my_admin" />
+            \
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
