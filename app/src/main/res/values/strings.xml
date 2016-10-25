@@ -19,4 +19,11 @@
     <string name="tv_common_num">常用电话号码</string>
     <string name="tv_change_style">更改归属地显示风格</string>
     <string name="tv_service_state">归属地服务未开启</string>
+    <string name="tv_unknown_num">未知号码</string>
+    <string name="tv_blacklist_intercept_open">黑名单拦截已开启</string>
+    <string name="tv_blacklist_intercept_closed">黑名单拦截未开启</string>
+    <string name="tv_address_open">归属地显示已开启</string>
+    <string name="tv_address_closed">归属地显示已关闭</string>
+    <string name="tv_applock_open">程序锁已开启</string>
+    <string name="tv_applock_closed">程序锁未开启</string>
 </resources>

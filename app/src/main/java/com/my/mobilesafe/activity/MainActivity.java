@@ -99,11 +99,7 @@ public class MainActivity extends BaseActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (position){
                 case 0:
-                    boolean setFinished = sp.getBoolean(SharedKey.SETTING_FINISH, false);
-                    if(setFinished)
-                        startActivity(new Intent(getApplicationContext(), ProtectInfoActivity.class));
-                    else
-                        startActivity(new Intent(getApplicationContext(), LostFoundActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LostFoundActivity.class));
                     break;
                 case 1:
 

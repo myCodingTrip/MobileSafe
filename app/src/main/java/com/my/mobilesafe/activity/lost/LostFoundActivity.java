@@ -12,19 +12,20 @@ import android.widget.EditText;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
+import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.utils.ToastUtil;
 
 
 public class LostFoundActivity extends BaseActivity {
     SharedPreferences sp;
-    private final String PASSWORD = "password";
     String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         sp = getSharedPreferences("config", Context.MODE_PRIVATE);
-        password = sp.getString(PASSWORD, null);
+        password = sp.getString(SharedKey.PASSWORD, null);
         if (TextUtils.isEmpty(password)) {
             setPassword();
         } else {
@@ -57,7 +58,7 @@ public class LostFoundActivity extends BaseActivity {
                     ToastUtil.show(getApplicationContext(), "密码不相同");
                 }else {
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString(PASSWORD, inputPassword);
+                    editor.putString(SharedKey.PASSWORD, inputPassword);
                     editor.commit();
                     dialog.dismiss();
                     finish();
@@ -92,8 +93,11 @@ public class LostFoundActivity extends BaseActivity {
                 if (TextUtils.isEmpty(inputPassword)){
                     ToastUtil.show(getApplicationContext(), "密码不能为空");
                 }else if(inputPassword.equals(password)){
-                    Intent intent = new Intent(getApplicationContext(), SetGuideActivity1.class);
-                    startActivity(intent);
+                    boolean setFinished = sp.getBoolean(SharedKey.SETTING_FINISH, false);
+                    if(setFinished)
+                        startActivity(new Intent(getApplicationContext(), ProtectInfoActivity.class));
+                    else
+                        startActivity(new Intent(getApplicationContext(), SetGuideActivity1.class));
                     dialog.dismiss();
                     finish();
                 }else {

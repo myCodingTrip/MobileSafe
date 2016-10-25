@@ -48,9 +48,9 @@
         <activity android:name=".activity.lost.ProtectInfoActivity" />
         <activity android:name=".activity.tool.ToolActivity" />
         <activity android:name=".activity.tool.AddressQueryActivity" />
-        <activity android:name=".activity.TestActivity">
-
-        </activity>
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.setting.ChangeAddressLocationActivity"
+            android:theme="@android:style/Theme.Translucent"/>
 
         <receiver android:name=".receiver.BootCompleteReceiver">
             <intent-filter android:priority="1000">
@@ -66,11 +66,14 @@
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/my_admin" />
-            \
+
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".service.AddressShowService" />
+        <service android:name=".service.SmsCallSafeService" />
     </application>
 
 </manifest>

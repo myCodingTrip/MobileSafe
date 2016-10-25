@@ -13,8 +13,8 @@ import android.util.Xml;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
-import com.my.mobilesafe.activity.setting.SettingCenterActivity;
 import com.my.mobilesafe.bean.UpdateInfo;
+import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.http.OkHttpHelper;
 import com.my.mobilesafe.http.SpotsCallBack;
 import com.my.mobilesafe.utils.FileUtils;
@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity {
         if(versionName != null)
             tvVersion.setText("版本号：" + versionName);
         sp = getSharedPreferences("config", MODE_PRIVATE);
-        boolean isAutoUpdate = sp.getBoolean(SettingCenterActivity.IS_AUTO_UPDATE, true);
+        boolean isAutoUpdate = sp.getBoolean(SharedKey.IS_AUTO_UPDATE, true);
         if (isAutoUpdate){
             //checkNewVersion();
         }

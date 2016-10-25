@@ -14,9 +14,6 @@ import butterknife.OnClick;
 
 public class ToolActivity extends BaseActivity {
 
-    @InjectView(R.id.tv_service_state)
-    TextView tvServiceState;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +21,11 @@ public class ToolActivity extends BaseActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.tv_query_phone_address, R.id.cb_atools_address, R.id.tv_change_style, R.id.tv_change_location, R.id.tv_backup_sms, R.id.tv_restore_sms, R.id.tv_app_lock, R.id.tv_common_num})
+    @OnClick({R.id.tv_query_phone_address, R.id.tv_backup_sms, R.id.tv_restore_sms, R.id.tv_app_lock, R.id.tv_common_num})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_query_phone_address:
                 startActivity(new Intent(this, AddressQueryActivity.class));
-                break;
-            case R.id.cb_atools_address:
                 break;
             case R.id.tv_change_style:
                 break;

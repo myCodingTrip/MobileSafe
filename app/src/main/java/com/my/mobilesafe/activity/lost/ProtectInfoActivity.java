@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import static com.my.mobilesafe.constant.SharedKey.IS_PROTECT_OPEN;
+import static com.my.mobilesafe.constant.SharedKey.IS_LOST_PROTECT_OPEN;
 
 public class ProtectInfoActivity extends AppCompatActivity {
 
@@ -32,7 +32,7 @@ public class ProtectInfoActivity extends AppCompatActivity {
         ButterKnife.inject(this);
         sp = getSharedPreferences("config", MODE_PRIVATE);
         getSafeNum();
-        boolean isProtect = sp.getBoolean(IS_PROTECT_OPEN, false);
+        boolean isProtect = sp.getBoolean(IS_LOST_PROTECT_OPEN, false);
         cbIsProtecting.setChecked(isProtect);
         setCheckBoxText();
     }
@@ -70,7 +70,7 @@ public class ProtectInfoActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(IS_PROTECT_OPEN, cbIsProtecting.isChecked());
+        editor.putBoolean(IS_LOST_PROTECT_OPEN, cbIsProtecting.isChecked());
         editor.commit();
     }
 }

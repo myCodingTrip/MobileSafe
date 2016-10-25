@@ -31,7 +31,7 @@ public class SetGuideActivity4 extends BaseActivity {
         ButterKnife.inject(this);
 
         sp = getSharedPreferences(SharedKey.CONFIG, MODE_PRIVATE);
-        isProtect = sp.getBoolean(SharedKey.IS_PROTECT_OPEN, false);
+        isProtect = sp.getBoolean(SharedKey.IS_LOST_PROTECT_OPEN, false);
         cbIsProtecting.setChecked(isProtect);
         setCbText();
     }
@@ -50,7 +50,7 @@ public class SetGuideActivity4 extends BaseActivity {
                 break;
             case R.id.btn_next:
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putBoolean(SharedKey.IS_PROTECT_OPEN, isProtect);
+                editor.putBoolean(SharedKey.IS_LOST_PROTECT_OPEN, isProtect);
                 editor.putBoolean(SharedKey.SETTING_FINISH, true);
                 editor.commit();
                 startMyAdmin();

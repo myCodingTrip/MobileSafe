@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cc000000">
+    <include
+        android:id="@+id/window_address"
+        layout="@layout/window_address"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_change_address_location"
+        android:gravity="center_horizontal"
+        android:text="按住提示框拖动到任意位置\n按手机返回键立刻生效" />
+</RelativeLayout>
