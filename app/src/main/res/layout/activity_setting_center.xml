@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/activity_setting_center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:text="自动更新设置"/>
+            android:text="@string/tv_auto_update_setting"/>
         <TextView
             android:id="@+id/tv_update_state"
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:textSize="15sp"
             android:textColor="#f00"
             android:layout_below="@id/tv_update_setting"
-            android:text="自动更新已开启"/>
+            tool:text="自动更新已开启"/>
         <CheckBox
             android:id="@+id/cb_update_setting"
             android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:text="归属地显示设置"/>
+            android:text="@string/tv_address_show_setting"/>
         <TextView
             android:id="@+id/tv_address_state"
             android:layout_width="match_parent"
@@ -62,7 +63,7 @@
             android:textSize="15sp"
             android:textColor="#f00"
             android:layout_below="@id/tv_address_setting"
-            android:text="归属地显示已开启"/>
+            tool:text="归属地显示已开启"/>
         <CheckBox
             android:id="@+id/cb_address_setting"
             android:layout_width="wrap_content"
@@ -119,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:text="黑名单拦截设置"/>
+            android:text="@string/tv_blacklist_setting"/>
         <TextView
             android:id="@+id/tv_blacklist_state"
             android:layout_width="match_parent"
@@ -127,7 +128,7 @@
             android:textSize="15sp"
             android:textColor="#f00"
             android:layout_below="@id/tv_blacklist_setting"
-            android:text="黑名单拦截已开启"/>
+            tool:text="黑名单拦截已开启"/>
         <CheckBox
             android:id="@+id/cb_blacklist_setting"
             android:layout_width="wrap_content"
@@ -154,7 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:text="程序锁设置"/>
+            android:text="@string/tv_app_lock_setting"/>
         <TextView
             android:id="@+id/tv_applock_state"
             android:layout_width="match_parent"

@@ -27,10 +27,6 @@ public class ToolActivity extends BaseActivity {
             case R.id.tv_query_phone_address:
                 startActivity(new Intent(this, AddressQueryActivity.class));
                 break;
-            case R.id.tv_change_style:
-                break;
-            case R.id.tv_change_location:
-                break;
             case R.id.tv_backup_sms:
                 break;
             case R.id.tv_restore_sms:
@@ -38,6 +34,7 @@ public class ToolActivity extends BaseActivity {
             case R.id.tv_app_lock:
                 break;
             case R.id.tv_common_num:
+
                 break;
         }
     }

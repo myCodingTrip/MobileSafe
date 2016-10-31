@@ -57,7 +57,7 @@ public class SplashActivity extends BaseActivity {
         sp = getSharedPreferences("config", MODE_PRIVATE);
         boolean isAutoUpdate = sp.getBoolean(SharedKey.IS_AUTO_UPDATE, true);
         if (isAutoUpdate){
-            //checkNewVersion();
+            checkNewVersion();
         }
         loadMainActivity();
     }
@@ -88,7 +88,6 @@ public class SplashActivity extends BaseActivity {
 
                 @Override
                 public void onError(Response response, int code, Exception e) {
-
                 }
             });
         }

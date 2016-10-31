@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
-import com.my.mobilesafe.activity.lost.LostFoundActivity;
-import com.my.mobilesafe.activity.lost.ProtectInfoActivity;
+import com.my.mobilesafe.activity.communication.CommunicationDefenderActivity;
+import com.my.mobilesafe.activity.lost.AgainstTheftActivity;
 import com.my.mobilesafe.activity.setting.SettingCenterActivity;
 import com.my.mobilesafe.activity.tool.ToolActivity;
 import com.my.mobilesafe.bean.MainItem;
@@ -58,13 +58,13 @@ public class MainActivity extends BaseActivity {
         public GridViewAdapter() {
             mainItems.add(new MainItem("手机防盗", R.mipmap.safe));
             mainItems.add(new MainItem("通信卫士", R.mipmap.callmsgsafe));
-            mainItems.add(new MainItem("软件管理", R.mipmap.app));
-            mainItems.add(new MainItem("进程管理", R.mipmap.taskmanager));
+            mainItems.add(new MainItem(getString(R.string.tv_app_manager), R.mipmap.app));
+            mainItems.add(new MainItem(getString(R.string.tv_progress_manager), R.mipmap.taskmanager));
             mainItems.add(new MainItem("流量统计", R.mipmap.netmanager));
             mainItems.add(new MainItem("手机杀毒", R.mipmap.trojan));
             mainItems.add(new MainItem("缓存清理", R.mipmap.sysoptimize));
             mainItems.add(new MainItem("高级工具", R.mipmap.atools));
-            mainItems.add(new MainItem("设置中心", R.mipmap.settings));
+            mainItems.add(new MainItem(getString(R.string.tv_setting_center), R.mipmap.settings));
         }
 
         @Override
@@ -98,11 +98,11 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (position){
-                case 0:
-                    startActivity(new Intent(getApplicationContext(), LostFoundActivity.class));
+                case 0://手机防盗
+                    startActivity(new Intent(getApplicationContext(), AgainstTheftActivity.class));
                     break;
-                case 1:
-
+                case 1://通讯卫士
+                    startActivity(new Intent(getApplicationContext(), CommunicationDefenderActivity.class));
                     break;
                 case 2:
 
@@ -119,10 +119,10 @@ public class MainActivity extends BaseActivity {
                 case 6:
 
                     break;
-                case 7:
+                case 7://高级工具
                     startActivity(new Intent(getApplicationContext(), ToolActivity.class));
                     break;
-                case 8:
+                case 8://设置中心
                     Intent settingIntent = new Intent(getApplicationContext(), SettingCenterActivity.class);
                     startActivity(settingIntent);
                     break;

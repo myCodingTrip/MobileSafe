@@ -3,9 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#cc000000">
-    <include
-        android:id="@+id/window_address"
-        layout="@layout/window_address"/>
+    <!--<include-->
+        <!--android:id="@+id/window_address"-->
+        <!--layout="@layout/window_address"/>-->
+    <Button
+        android:id="@+id/btn_window_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:text="双击居中"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

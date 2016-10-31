@@ -47,6 +47,7 @@ public class AddressQueryActivity extends AppCompatActivity {
             }
         }else Log.d(TAG, "文件已存在");
 
+        //设置号码动态查询功能
         etQueryNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -62,7 +63,7 @@ public class AddressQueryActivity extends AppCompatActivity {
                 if(s.length() < 7){
                     address = getString(R.string.tv_unknown_num);;
                 }else if(s.length() >= 7){
-                    address = getAddress(getApplicationContext(), num);
+                    address = AddressDao.getAddress(getApplicationContext(), num);
                 }
                 tvAddress.setText(address);
             }
@@ -76,29 +77,9 @@ public class AddressQueryActivity extends AppCompatActivity {
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.shake);
             etQueryNumber.startAnimation(animation);
         }else {
-            String address = getAddress(this, num);
+            String address = AddressDao.getAddress(this, num);
             tvAddress.setText(address);
         }
-    }
-
-    private String getAddress(Context context, String num) {
-        String address = null;
-        File dir = context.getFilesDir();
-        File file = new File(dir, AddressDao.DB_NAME);
-        SQLiteDatabase db = SQLiteDatabase.openDatabase(file.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
-        if(RegexUtil.isMobileNum(num)){
-            String prefix = num.substring(0, 7);
-            Cursor cursor = db.rawQuery("select location from data2 where id = " +
-                    "(select outkey from data1 where id=?)", new String[]{prefix});
-            if(cursor.moveToFirst()){
-                address = cursor.getString(0);
-            }
-            cursor.close();
-        }
-        if (address == null){
-            address = getString(R.string.tv_unknown_num);
-        }
-        return address;
     }
 
 }

@@ -9,6 +9,7 @@
         android:id="@+id/et_query_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="请输入电话号码"/>
 
     <Button

@@ -11,7 +11,7 @@ import android.widget.CheckBox;
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
 import com.my.mobilesafe.constant.SharedKey;
-import com.my.mobilesafe.receiver.MyAdmin;
+import com.my.mobilesafe.receiver.MyAdminReceiver;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -64,7 +64,7 @@ public class SetGuideActivity4 extends BaseActivity {
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
         // 指定要激活的组件
         ComponentName mDeviceAdminSample = new  ComponentName(this,
-                MyAdmin.class);
+                MyAdminReceiver.class);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
                 mDeviceAdminSample);
         intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,

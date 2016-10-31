@@ -13,6 +13,7 @@ import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
 import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.service.AddressShowService;
+import com.my.mobilesafe.service.BlackListService;
 import com.my.mobilesafe.utils.SettingUtil;
 
 import butterknife.ButterKnife;
@@ -93,8 +94,12 @@ public class SettingCenterActivity extends BaseActivity {
             case R.id.cb_blacklist_setting:
                 if (cbBlacklistSetting.isChecked()) {
                     tvBlacklistState.setText(R.string.tv_blacklist_intercept_open);
+                    Intent serviceIntent = new Intent(this, BlackListService.class);
+                    startService(serviceIntent);
                 } else {
                     tvBlacklistState.setText(R.string.tv_blacklist_intercept_closed);
+                    Intent serviceIntent = new Intent(this, BlackListService.class);
+                    stopService(serviceIntent);
                 }
                 break;
             case R.id.cb_applock_setting:

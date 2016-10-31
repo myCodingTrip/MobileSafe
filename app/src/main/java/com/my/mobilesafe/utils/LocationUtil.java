@@ -13,6 +13,7 @@ import com.squareup.okhttp.Response;
 
 /**
  * Created by MY on 2016/10/18.
+ * 用于获取位置信息
  */
 public class LocationUtil {
     static final String TAG = "LocationUtil";

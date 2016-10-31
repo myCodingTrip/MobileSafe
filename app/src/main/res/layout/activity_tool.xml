@@ -20,12 +20,6 @@
         android:layout_marginTop="5dip"
         android:background="@android:color/white" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:layout_marginTop="5dip"
-        android:background="@android:color/white" />
-
     <TextView
         android:id="@+id/tv_backup_sms"
         android:layout_width="match_parent"

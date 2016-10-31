@@ -16,7 +16,7 @@ import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.utils.ToastUtil;
 
 
-public class LostFoundActivity extends BaseActivity {
+public class AgainstTheftActivity extends BaseActivity {
     SharedPreferences sp;
     String password;
 
