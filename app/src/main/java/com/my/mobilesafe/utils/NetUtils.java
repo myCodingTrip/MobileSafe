@@ -9,7 +9,12 @@ import android.net.NetworkInfo;
  * 联网工具类
  */
 public class NetUtils {
-    //获取网络连接信息
+
+    /**
+     * 获取网络连接信息
+     * @param context
+     * @return 当前网络连接是否可用
+     */
     public static boolean isConnected(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();

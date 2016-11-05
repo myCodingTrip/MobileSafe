@@ -61,6 +61,7 @@ public class AgainstTheftActivity extends BaseActivity {
                     editor.putString(SharedKey.PASSWORD, inputPassword);
                     editor.commit();
                     dialog.dismiss();
+                    startActivity(new Intent(getApplicationContext(), SetGuideActivity1.class));
                     finish();
                 }
             }

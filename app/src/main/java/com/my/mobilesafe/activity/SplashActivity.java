@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.bean.UpdateInfo;
@@ -18,6 +20,8 @@ import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.http.OkHttpHelper;
 import com.my.mobilesafe.http.SpotsCallBack;
 import com.my.mobilesafe.utils.FileUtils;
+import com.my.mobilesafe.utils.NetUtils;
+import com.my.mobilesafe.utils.ToastUtil;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -41,9 +45,10 @@ public class SplashActivity extends BaseActivity {
 
     @InjectView(R.id.tv_version)
     TextView tvVersion;
-    public static final String LOG_TAG = "MobileSafe";
+    public static final String TAG = "SplashActivity";
     private String versionName;
     SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +63,15 @@ public class SplashActivity extends BaseActivity {
         boolean isAutoUpdate = sp.getBoolean(SharedKey.IS_AUTO_UPDATE, true);
         if (isAutoUpdate){
             checkNewVersion();
+        }else {
+            loadMainActivity();
         }
-        loadMainActivity();
     }
 
+    /**
+     * 得到当前应用的版本号
+     * @return 当前应用的版本号
+     */
     public String getVersionName(){
         try {
             PackageManager packageManager = getPackageManager();
@@ -72,9 +82,12 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 检查是否为最新版本
+     */
     public void checkNewVersion(){
         //NetUtils.isConnected(this)
-        if(true){
+        if(NetUtils.isConnected(this)){
             OkHttpHelper okHttpHelper = OkHttpHelper.getInstance();
             String url = "http://10.0.2.2:8080/MobileSafeWeb/updateinfo.xml";
 
@@ -82,18 +95,31 @@ public class SplashActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(Response response, String xmlString) {
-                    parseXML(xmlString);
+                    UpdateInfo updateInfo = parseXML(xmlString);
+                    //如果不是最新版则弹出对话框，否则直接加载主界面
+                    if (updateInfo!=null && !updateInfo.getVersion().equals(versionName)){
+                        showUpdateDialog(updateInfo);
+                    }else {
+                        loadMainActivity();
+                    }
                     //System.out.println(xmlString);
                 }
 
                 @Override
                 public void onError(Response response, int code, Exception e) {
+                    ToastUtil.show(getApplicationContext(), "当前网络不可用");
                 }
             });
+        }else {
+            ToastUtil.show(this, "当前网络不可用");
         }
     }
 
-    private void parseXML(String xmlString) {
+    /**
+     * 解析updateInfo的字符串为UpdateInfo对象
+     * @param xmlString xml的字符串
+     */
+    private UpdateInfo parseXML(String xmlString) {
         ByteArrayInputStream is = new ByteArrayInputStream(xmlString.getBytes());
         XmlPullParser parser = Xml.newPullParser();
         try {
@@ -120,14 +146,17 @@ public class SplashActivity extends BaseActivity {
                 }
                 eventType = parser.next();
             }
-            if (!updateInfo.getVersion().equals(versionName)){
-                showUpdateDialog(updateInfo);
-            }
+            return updateInfo;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
+    /**
+     * 弹出更新提示的对话框
+     * @param updateInfo 包含更新描述和apk地址
+     */
     private void showUpdateDialog(final UpdateInfo updateInfo) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("更新提示");
@@ -142,15 +171,21 @@ public class SplashActivity extends BaseActivity {
         builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                loadMainActivity();
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
+    /**
+     * 下载新版apk
+     * @param url 新版apk下载地址
+     */
     private void downloadNewApk(final String url) {
+        //如果sd卡不存在
         if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            ToastUtil.show(this, "sd卡不存在");
             return;
         }
 
@@ -159,14 +194,13 @@ public class SplashActivity extends BaseActivity {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-
             }
 
             @Override
             public void onResponse(Response response){
                 InputStream is = null;
                 FileOutputStream fos = null;
-                String SDPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                String SDPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "//MobileSafe";
                 try {
                     byte[] buf = new byte[1024];
                     int len = 0;
@@ -174,17 +208,17 @@ public class SplashActivity extends BaseActivity {
                     long total = response.body().contentLength();
                     String name = FileUtils.getFileName(url);
                     File file = new File(Environment.getExternalStorageDirectory(), name);
-                    System.out.println(Environment.getExternalStorageDirectory());
                     //File file = new File("/sdcard", name);
                     fos = new FileOutputStream(file);
                     while ((len = is.read(buf)) != -1) {
                         fos.write(buf, 0, len);
                     }
                     fos.flush();
-                    Log.d(LOG_TAG, "文件下载成功");
+                    Log.d(TAG, "文件下载成功");
+                    installApk(file);
                 } catch (Exception e) {
-                    //TODO  权限被拒绝
-                    Log.d(LOG_TAG, "文件下载失败");
+                    Log.d(TAG, "文件下载失败");
+                    ToastUtil.show(getApplicationContext(), "文件下载失败");
                     e.printStackTrace();
                 } finally {
                     try {
@@ -194,9 +228,25 @@ public class SplashActivity extends BaseActivity {
                     }
                 }
             }
+
+            /**
+             * 安装apk文件
+             * @param file apk文件
+             */
+            private void installApk(File file) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri data = Uri.fromFile(file);
+                intent.setDataAndType(data, "application/vnd.android.package-archive");
+                startActivity(intent);
+                finish();
+            }
         });
     }
 
+    /**
+     * 加载主界面并关闭此界面
+     */
     private void loadMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

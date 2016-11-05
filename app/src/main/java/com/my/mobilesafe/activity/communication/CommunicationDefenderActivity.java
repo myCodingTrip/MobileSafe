@@ -8,6 +8,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.bean.BlackNumber;
 import com.my.mobilesafe.dao.BlackNumberDao;
+import com.my.mobilesafe.service.BlackListService;
 import com.my.mobilesafe.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -57,13 +59,27 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
 //        for (int i = 0; i < 100; i++) {
 //            dao.add(new BlackNumber("", i + "", i%3));
 //        }
+        setLvBlackList();
 
+        //通过点击通知来启动此界面并添加黑名单号码
+        String number = getIntent().getStringExtra(BlackListService.NUMBER);
+        Log.d(TAG, "number"+number);
+        if (!TextUtils.isEmpty(number)){
+            showAddBlackNumDialog(number);
+        }
+    }
+
+    /**
+     * 设置黑名单列表的上拉加载功能
+     */
+    private void setLvBlackList() {
         adapter = new MyAdapter();
         footerView = getLayoutInflater().inflate(R.layout.footer, null);
         //赋予能力
         lvBlackList.addFooterView(footerView);
         lvBlackList.setAdapter(adapter);
         lvBlackList.removeFooterView(footerView);
+
         lvBlackList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -94,17 +110,18 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
                 }
             }
 
+            /**
+             * 通过多线程加载黑名单数据
+             */
             private void loadData() {
                 new Thread(){
                     @Override
                     public void run() {
-                        //模拟延时2s
+                        //模拟延时2s加载
                         SystemClock.sleep(2000);
-                        //加载数据
                         startId+=length;
                         numbers.addAll(dao.queryLimit(startId, length));
                         isLoading = false;
-
                         Message message = Message.obtain();
                         message.what = UPDATE_ADAPTER;
                         mHandler.sendMessage(message);
@@ -112,6 +129,7 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
                 }.start();
             }
         });
+
     }
 
     private Handler mHandler = new Handler(){
@@ -130,7 +148,7 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add_black_number:
-                showAddBlackNumDialog();
+                showAddBlackNumDialog("");
                 break;
             case R.id.btn_clear:
                 //TODO 耗时，添加多线程
@@ -141,7 +159,11 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
         }
     }
 
-    private void showAddBlackNumDialog() {
+    /**
+     * 显示添加黑名单的对话框
+     * @param number etBlackNum中的默认号码
+     */
+    private void showAddBlackNumDialog(String number) {
 //        View.inflate()
 //        getLayoutInflater()
 //        LayoutInflater.from(this).inflate() 最终使用
@@ -194,6 +216,9 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
             }
         });
 
+        if (!TextUtils.isEmpty(number)){
+            etBlackNum.setText(number);
+        }
         //builder.setTitle("添加黑名单号码");
 //        final EditText et = new EditText(this);
 //        et.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -300,4 +325,5 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
             }
         }
     }
+
 }
