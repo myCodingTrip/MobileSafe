@@ -18,7 +18,7 @@
     <string name="tv_query_phone_num">手机号码归属地查询</string>
     <string name="tv_change_location">更改归属地显示位置</string>
     <string name="tv_backup_sms">短信备份</string>
-    <string name="tv_restore_sms">短信的还原</string>
+    <string name="tv_restore_sms">短信还原</string>
     <string name="tv_app_lock">程序锁</string>
     <string name="tv_common_num">常用电话号码</string>
     <string name="tv_change_style">更改归属地显示风格</string>

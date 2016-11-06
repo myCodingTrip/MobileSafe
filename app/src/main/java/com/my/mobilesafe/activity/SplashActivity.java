@@ -12,14 +12,13 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.bean.UpdateInfo;
 import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.http.OkHttpHelper;
 import com.my.mobilesafe.http.SpotsCallBack;
-import com.my.mobilesafe.utils.FileUtils;
+import com.my.mobilesafe.utils.FileUtil;
 import com.my.mobilesafe.utils.NetUtils;
 import com.my.mobilesafe.utils.ToastUtil;
 import com.squareup.okhttp.Callback;
@@ -116,7 +115,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     /**
-     * 解析updateInfo的字符串为UpdateInfo对象
+     * 解析UpdateInfo的xml字符串为UpdateInfo对象
      * @param xmlString xml的字符串
      */
     private UpdateInfo parseXML(String xmlString) {
@@ -198,34 +197,19 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onResponse(Response response){
-                InputStream is = null;
-                FileOutputStream fos = null;
-                String SDPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "//MobileSafe";
                 try {
-                    byte[] buf = new byte[1024];
-                    int len = 0;
-                    is = response.body().byteStream();
-                    long total = response.body().contentLength();
-                    String name = FileUtils.getFileName(url);
-                    File file = new File(Environment.getExternalStorageDirectory(), name);
-                    //File file = new File("/sdcard", name);
-                    fos = new FileOutputStream(file);
-                    while ((len = is.read(buf)) != -1) {
-                        fos.write(buf, 0, len);
+                    InputStream is = response.body().byteStream();
+                    FileUtil.createAppFolder();
+                    String apkName = FileUtil.getFileName(url);
+                    File file = new File(FileUtil.APP_DIR, apkName);
+                    boolean isFileCreated = FileUtil.inputFile(is, file);
+                    if (isFileCreated){
+                        installApk(file);
+                    }else {
+                        ToastUtil.show(getApplicationContext(), "文件下载失败");
                     }
-                    fos.flush();
-                    Log.d(TAG, "文件下载成功");
-                    installApk(file);
                 } catch (Exception e) {
-                    Log.d(TAG, "文件下载失败");
-                    ToastUtil.show(getApplicationContext(), "文件下载失败");
                     e.printStackTrace();
-                } finally {
-                    try {
-                        if (is != null) is.close();
-                        if (fos != null) fos.close();
-                    } catch (IOException e) {
-                    }
                 }
             }
 
