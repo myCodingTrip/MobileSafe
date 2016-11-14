@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
+import com.my.mobilesafe.activity.app_manager.AppManagerActivity;
 import com.my.mobilesafe.activity.communication.CommunicationDefenderActivity;
 import com.my.mobilesafe.activity.lost.AgainstTheftActivity;
 import com.my.mobilesafe.activity.setting.SettingCenterActivity;
+import com.my.mobilesafe.activity.tool.AppLockActivity;
 import com.my.mobilesafe.activity.tool.ToolActivity;
 import com.my.mobilesafe.bean.MainItem;
 import com.my.mobilesafe.constant.SharedKey;
@@ -104,8 +106,8 @@ public class MainActivity extends BaseActivity {
                 case 1://通讯卫士
                     startActivity(new Intent(getApplicationContext(), CommunicationDefenderActivity.class));
                     break;
-                case 2:
-
+                case 2://软件管理
+                    startActivity(new Intent(getApplicationContext(), AppLockActivity.class));
                     break;
                 case 3:
 

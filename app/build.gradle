@@ -27,4 +27,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.github.d-max:spots-dialog:0.4@aar'
+    compile 'com.android.support:recyclerview-v7:24.0.0'
 }

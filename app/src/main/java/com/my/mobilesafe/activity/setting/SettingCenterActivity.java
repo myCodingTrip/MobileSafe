@@ -14,6 +14,7 @@ import com.my.mobilesafe.activity.BaseActivity;
 import com.my.mobilesafe.constant.SharedKey;
 import com.my.mobilesafe.service.AddressShowService;
 import com.my.mobilesafe.service.BlackListService;
+import com.my.mobilesafe.service.WatchDogService;
 import com.my.mobilesafe.utils.SettingUtil;
 
 import butterknife.ButterKnife;
@@ -103,10 +104,13 @@ public class SettingCenterActivity extends BaseActivity {
                 }
                 break;
             case R.id.cb_applock_setting:
+                Intent intent = new Intent(this, WatchDogService.class);
                 if (cbApplockSetting.isChecked()) {
                     tvApplockState.setText(R.string.tv_applock_open);
+                    startService(intent);
                 } else {
                     tvApplockState.setText(R.string.tv_applock_closed);
+                    stopService(intent);
                 }
                 break;
             case R.id.tv_change_style:
@@ -123,7 +127,7 @@ public class SettingCenterActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String selected = items[which];//选中的风格
-                        //TODO .9图片不规范，无法完成此功能
+                        //TODO .9图片不规范，无法完成选择风格功能
                         int styleResId = 0;
                         switch (which){
                             case 0:
@@ -169,6 +173,9 @@ public class SettingCenterActivity extends BaseActivity {
         putBooleans();
     }
 
+    /**
+     * 保存自动更新、归属地显示、黑名单拦截和程序锁的设置
+     */
     private void putBooleans() {
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(SharedKey.IS_AUTO_UPDATE, cbUpdateSetting.isChecked());

@@ -45,12 +45,12 @@ public class ToolActivity extends BaseActivity {
                 break;
             case R.id.tv_backup_sms:
                 backupSms();
-                //startActivity(new Intent(this, BackupSmsActivity.class));
                 break;
             case R.id.tv_restore_sms:
                 restoreSms();
                 break;
             case R.id.tv_app_lock:
+                startActivity(new Intent(this, AppLockActivity.class));
                 break;
             case R.id.tv_common_num:
                 break;
