@@ -18,11 +18,18 @@
         android:singleLine="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
-        android:text="欢迎来到手机卫士，这里是您手机的守护神。哈哈哈哈哈哈哈哈哈哈哈哈哈"/>
+        android:textSize="18sp"
+        android:text="欢迎来到手机卫士，这里是您手机的守护神，请尽情使用所有的功能。"/>
 
-    <GridView
-        android:id="@+id/gridview"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:numColumns="3"/>
+    </FrameLayout>
 </LinearLayout>

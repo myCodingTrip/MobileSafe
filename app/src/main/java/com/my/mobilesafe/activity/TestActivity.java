@@ -22,27 +22,22 @@ public class TestActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        List<String> list = new ArrayList<>();
-        for (int i=0; i<100; i++){
-            list.add(i+"");
-        }
-        MyAdapter adapter = new MyAdapter(this, list);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_test);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        setContentView(R.layout.activity_traffic_manager);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.rv_content);
 
     }
-    private class MyAdapter extends SimpleAdapter<String>{
+    class Adapter extends SimpleAdapter<String>{
 
-        public MyAdapter(Context context, List<String> data) {
-            super(context, data, R.layout.item_test);
+        public Adapter(Context context, List<String> data, int layoutResId) {
+            super(context, data, R.layout.item_traffic_manager);
         }
 
         @Override
         public void setViews(BaseViewHolder holder, String s) {
-            holder.getTextView(R.id.tv_test).setText(s);
+//            holder.getImageView(R.id.img_app_icon).setImageDrawable(resolveInfo.loadIcon(pm));
+//            holder.getTextView(R.id.tv_app_name).setText(resolveInfo.loadLabel(pm));
+//            holder.getTextView(R.id.tv_traffic_tx).setText(TextFormater.getDataSize( TrafficStats.getUidTxBytes(uid)));
+//            holder.getTextView(R.id.tv_traffic_rx).setText(TextFormater.getDataSize( TrafficStats.getUidRxBytes(uid)));
         }
     }
 }

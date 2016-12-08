@@ -12,10 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
-import com.my.mobilesafe.activity.app_manager.AppManagerActivity;
 import com.my.mobilesafe.activity.communication.CommunicationDefenderActivity;
+import com.my.mobilesafe.activity.flow.TrafficManagerActivity;
 import com.my.mobilesafe.activity.lost.AgainstTheftActivity;
 import com.my.mobilesafe.activity.setting.SettingCenterActivity;
+import com.my.mobilesafe.activity.task_manager.TaskManagerActivity;
 import com.my.mobilesafe.activity.tool.AppLockActivity;
 import com.my.mobilesafe.activity.tool.ToolActivity;
 import com.my.mobilesafe.bean.MainItem;
@@ -109,11 +110,11 @@ public class MainActivity extends BaseActivity {
                 case 2://软件管理
                     startActivity(new Intent(getApplicationContext(), AppLockActivity.class));
                     break;
-                case 3:
-
+                case 3://进程管理
+                    startActivity(new Intent(getApplicationContext(), TaskManagerActivity.class));
                     break;
-                case 4:
-
+                case 4://流量统计
+                    startActivity(new Intent(getApplicationContext(), TrafficManagerActivity.class));
                     break;
                 case 5:
 

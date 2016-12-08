@@ -73,7 +73,7 @@ public class AppInfoEngine {
      * @param flags
      * @return
      */
-    private boolean isUserApp(int flags) {
+    public static boolean isUserApp(int flags) {
         //用户应用/系统应用
         if((flags&ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0){
             //升级过的系统应用
