@@ -53,6 +53,7 @@ public class ToolActivity extends BaseActivity {
                 startActivity(new Intent(this, AppLockActivity.class));
                 break;
             case R.id.tv_common_num:
+                startActivity(new Intent(this, QueryCommonNumActivity.class));
                 break;
         }
     }

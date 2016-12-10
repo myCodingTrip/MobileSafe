@@ -9,6 +9,8 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
@@ -71,6 +73,13 @@ public class TrafficManagerActivity extends BaseActivity {
 
         public TrafficAdapter(Context context, List<ResolveInfo> data) {
             super(context, data, R.layout.item_traffic_manager);
+        }
+
+        @Override
+        public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            //如果parent处传null进去会造成weight属性失效
+            View view = layoutInflater.inflate(layoutResId, parent, false);
+            return new BaseViewHolder(view, onItemClickListener);
         }
 
         @Override
