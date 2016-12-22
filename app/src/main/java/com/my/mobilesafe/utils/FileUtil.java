@@ -1,5 +1,7 @@
 package com.my.mobilesafe.utils;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
@@ -10,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import static com.my.mobilesafe.dao.AddressDao.DB_NAME;
 
 /**
  * Created by MY on 2016/10/6.
@@ -107,5 +111,25 @@ public class FileUtil {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void copyAssetsFile(Context context, String fileName){
+        AssetManager assetManager = context.getAssets();
+        InputStream is = null;
+        try {
+            is = assetManager.open(fileName);
+            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = is.read(buffer)) != -1){
+                fos.write(buffer, 0, len);
+            }
+            fos.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

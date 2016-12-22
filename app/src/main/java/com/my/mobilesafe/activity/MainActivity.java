@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.communication.CommunicationDefenderActivity;
-import com.my.mobilesafe.activity.flow.TrafficManagerActivity;
+import com.my.mobilesafe.activity.traffic_manager.TrafficManagerActivity;
+import com.my.mobilesafe.activity.kill_virus.KillVirusActivity;
 import com.my.mobilesafe.activity.lost.AgainstTheftActivity;
 import com.my.mobilesafe.activity.setting.SettingCenterActivity;
 import com.my.mobilesafe.activity.task_manager.TaskManagerActivity;
@@ -116,8 +117,8 @@ public class MainActivity extends BaseActivity {
                 case 4://流量统计
                     startActivity(new Intent(getApplicationContext(), TrafficManagerActivity.class));
                     break;
-                case 5:
-
+                case 5://手机杀毒
+                    startActivity(new Intent(getApplicationContext(), KillVirusActivity.class));
                     break;
                 case 6:
 

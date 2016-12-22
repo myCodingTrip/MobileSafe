@@ -8,10 +8,24 @@ import android.graphics.drawable.Drawable;
 
 public class AppInfo {
     private int uid;
-
     private Drawable icon;
     private String name;
     private String versionName;
+    private String packageName;
+    private boolean isUserApp;
+    private boolean isSdcardApp;
+
+    private String md5Code;
+
+    private String cacheSize;
+
+    public String getCacheSize() {
+        return cacheSize;
+    }
+
+    public void setCacheSize(String cacheSize) {
+        this.cacheSize = cacheSize;
+    }
 
     public String getPackageName() {
         return packageName;
@@ -20,11 +34,6 @@ public class AppInfo {
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
-
-    private String packageName;
-
-    private boolean isUserApp;
-    private boolean isSdcardApp;
 
     public Drawable getIcon() {
         return icon;
@@ -72,5 +81,13 @@ public class AppInfo {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public String getMd5Code() {
+        return md5Code;
+    }
+
+    public void setMd5Code(String md5Code) {
+        this.md5Code = md5Code;
     }
 }

@@ -39,6 +39,12 @@ public class AddressDao {
         is.close();
     }
 
+    /**
+     * 获取号码的归属地
+     * @param context
+     * @param num
+     * @return
+     */
     public static String getAddress(Context context, String num) {
         String address = null;
         File dir = context.getFilesDir();

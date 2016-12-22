@@ -22,11 +22,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
-import com.my.mobilesafe.activity.task_manager.TaskManagerActivity;
 import com.my.mobilesafe.adapter.BaseAdapter;
 import com.my.mobilesafe.adapter.BaseViewHolder;
 import com.my.mobilesafe.adapter.SimpleAdapter;

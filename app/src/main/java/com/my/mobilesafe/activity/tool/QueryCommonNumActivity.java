@@ -1,8 +1,5 @@
 package com.my.mobilesafe.activity.tool;
 
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +9,10 @@ import android.widget.TextView;
 
 import com.my.mobilesafe.R;
 import com.my.mobilesafe.activity.BaseActivity;
+import com.my.mobilesafe.dao.CommonNumDao;
+import com.my.mobilesafe.utils.FileUtil;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -25,8 +21,9 @@ public class QueryCommonNumActivity extends BaseActivity {
 
     @InjectView(R.id.elv)
     ExpandableListView elv;
-    final String fileName = "CommonNum.db";
-    final String fileDirectory = "/sdcard/" + fileName;
+    final String fileName = "commonnum.db";
+    File file;
+    CommonNumDao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,66 +31,25 @@ public class QueryCommonNumActivity extends BaseActivity {
         setContentView(R.layout.activity_common_num_query);
         ButterKnife.inject(this);
 
-        // 判断这个CommonNum.db的数据库是否被放置到了sd卡上
-        // 如果不在sd卡上 要把db从asset目录拷贝到数据库
-        File file = new File(fileDirectory);
-        if (!file.exists()) {
-            copyFileToSdcard();
+        file = new File(getFilesDir(), fileName);
+        if (!file.exists()){
+            FileUtil.copyAssetsFile(this, fileName);
         }
-        elv.setAdapter(new MyAdapter());
-    }
 
-    private void copyFileToSdcard() {
-        AssetManager manager = getAssets();
-        try {
-            InputStream is = manager.open(fileName);
-            File file = new File(fileDirectory);
-            FileOutputStream fos = new FileOutputStream(file);
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, len);
-            }
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        dao = new CommonNumDao(file);
+        elv.setAdapter(new MyAdapter());
     }
 
     private class MyAdapter extends BaseExpandableListAdapter {
 
         @Override
         public int getGroupCount() {
-            int count = 0;
-            SQLiteDatabase db = SQLiteDatabase.openDatabase(fileDirectory, null, SQLiteDatabase.OPEN_READONLY);
-            if(db.isOpen()){
-                Cursor cursor = db.rawQuery("select count(*) from classlist", null);
-                if(cursor.moveToFirst()){
-                    count = cursor.getInt(0);
-                }
-                cursor.close();
-                db.close();
-            }
-            return count;
+            return dao.getGroupCount();
         }
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            int count=0;
-            int tableIndex = groupPosition + 1;
-            String sql = "select count(*) from table" + tableIndex;
-
-            SQLiteDatabase db = SQLiteDatabase.openDatabase(fileDirectory, null, SQLiteDatabase.OPEN_READONLY);
-            if(db.isOpen()){
-                Cursor cursor = db.rawQuery(sql, null);
-                if(cursor.moveToFirst()){
-                    count = cursor.getInt(0);
-                }
-                cursor.close();
-                db.close();
-            }
-            return count;
+            return dao.getChildrenCount(groupPosition + 1);
         }
 
         @Override
@@ -126,17 +82,8 @@ public class QueryCommonNumActivity extends BaseActivity {
             TextView tv = new TextView(QueryCommonNumActivity.this);
             tv.setTextSize(18);
             String text = "";
-            int currentPosition = groupPosition + 1;
-            SQLiteDatabase db = SQLiteDatabase.openDatabase(fileDirectory, null, SQLiteDatabase.OPEN_READONLY);
-            if(db.isOpen()){
-                Cursor cursor = db.rawQuery("select name from classlist where idx=?", new String[]{currentPosition+""});
-                if(cursor.moveToFirst()){
-                    text = cursor.getString(0);
-                }
-                cursor.close();
-                db.close();
-            }
-            tv.setText("             "+text);
+            text = dao.getGroupName(groupPosition + 1);
+            tv.setText("             " + text);
             return tv;
         }
 
@@ -144,23 +91,7 @@ public class QueryCommonNumActivity extends BaseActivity {
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             TextView tv = new TextView(QueryCommonNumActivity.this);
             tv.setTextSize(16);
-            StringBuilder sb = new StringBuilder();
-            int tableIndex = groupPosition + 1;
-            int childIndex = childPosition + 1;
-            String sql = "select number,name from table" + tableIndex;
-
-            SQLiteDatabase db = SQLiteDatabase.openDatabase(fileDirectory, null, SQLiteDatabase.OPEN_READONLY);
-            if(db.isOpen()){
-                Cursor cursor = db.rawQuery(sql+ " where _id=?", new String[]{childIndex+""});
-                if(cursor.moveToFirst()){
-                    sb.append(	cursor.getString(0)); //number
-                    sb.append(" : ");
-                    sb.append(	cursor.getString(1)); //name
-                }
-                cursor.close();
-                db.close();
-            }
-            String text = sb.toString();
+            String text = dao.getChildInfo(groupPosition+1, childPosition+1);
             tv.setText(text);
             return tv;
         }

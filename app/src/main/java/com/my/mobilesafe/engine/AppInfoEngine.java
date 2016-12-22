@@ -2,13 +2,19 @@ package com.my.mobilesafe.engine;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageStats;
 import android.graphics.drawable.Drawable;
+import android.os.RemoteException;
 import android.util.Log;
 
 import com.my.mobilesafe.bean.AppInfo;
+import com.my.mobilesafe.utils.Md5Utils;
+import com.my.mobilesafe.utils.TextFormater;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +25,10 @@ import java.util.List;
 public class AppInfoEngine {
     private static final String TAG = "AppInfoEngine";
     private PackageManager packageManager;
-
+    private Context mContext;
     public AppInfoEngine(Context context) {
         packageManager = context.getPackageManager();
+        mContext = context;
     }
 
     /**
@@ -101,4 +108,79 @@ public class AppInfoEngine {
             return true;
         }
     }
+
+    /**
+     * 获取所有应用的名称、包名、签名及其md5码，用于杀毒
+     * @return
+     */
+    public List<AppInfo> getAllAppSignatures(){
+        List<PackageInfo> installedPackages = packageManager.getInstalledPackages(PackageManager.GET_SIGNATURES);
+        List<AppInfo> appInfoList = new ArrayList<>();
+        for (PackageInfo packageInfo : installedPackages) {
+            AppInfo info = new AppInfo();
+
+            String name = packageInfo.applicationInfo.loadLabel(packageManager).toString();
+            info.setName(name);
+
+            String packageName = packageInfo.packageName;
+            info.setPackageName(packageName);
+
+            String result = packageInfo.signatures[0].toCharsString();
+            String md5 = Md5Utils.encode(result);
+            info.setMd5Code(md5);
+
+            appInfoList.add(info);
+        }
+        return appInfoList;
+    }
+
+
+    /**
+     * 获取所有应用的图标、名称、包名、缓存大小
+     * @return
+     */
+    public void getAllAppCacheSize(){
+        appInfoList = new ArrayList<>();
+        List<PackageInfo> installedPackages = packageManager.getInstalledPackages(0);
+        for (PackageInfo packageInfo : installedPackages) {
+            //程序包名
+            String packageName = packageInfo.packageName;
+            //获取缓存信息
+            try {
+                Class clazz = Class.forName("android.content.pm.PackageManager");
+                Method method = clazz.getMethod("getPackageSizeInfo", new Class[]{String.class, IPackageStatsObserver.class});
+                method.invoke(packageManager, new Object[]{packageName, mStatsObserver});
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    List<AppInfo> appInfoList;
+    private IPackageStatsObserver.Stub mStatsObserver = new IPackageStatsObserver.Stub() {
+        @Override
+        public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
+            long cacheSize = pStats.cacheSize;
+            try {
+                if (cacheSize > 0){
+                    AppInfo appInfo = new AppInfo();
+                    String packageName = pStats.packageName;
+                    PackageManager pm = packageManager;
+
+                    ApplicationInfo applicationInfo = pm.getApplicationInfo(packageName, 0);
+                    //获取应用图标
+                    Drawable icon = applicationInfo.loadIcon(packageManager);
+                    appInfo.setIcon(icon);
+                    //获取应用名称
+                    String appName = applicationInfo.loadLabel(packageManager).toString();
+                    appInfo.setName(appName);
+                    String cache = TextFormater.getDataSize(cacheSize);
+                    appInfo.setCacheSize(cache);
+
+                    appInfoList.add(appInfo);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
 }

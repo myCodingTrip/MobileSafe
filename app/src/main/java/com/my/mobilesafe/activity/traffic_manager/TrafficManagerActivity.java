@@ -1,4 +1,4 @@
-package com.my.mobilesafe.activity.flow;
+package com.my.mobilesafe.activity.traffic_manager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -68,7 +68,7 @@ public class TrafficManagerActivity extends BaseActivity {
         String wifiTraffic =  (TextFormater.getDataSize(wifiTotal));
         tvWifiTotal.setText(wifiTraffic);
     }
-    //item中weight失效
+
     private class TrafficAdapter extends SimpleAdapter<ResolveInfo>{
 
         public TrafficAdapter(Context context, List<ResolveInfo> data) {
