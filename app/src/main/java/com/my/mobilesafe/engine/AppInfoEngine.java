@@ -20,12 +20,14 @@ import java.util.List;
 
 /**
  * Created by MY on 2016/11/8.
+ * 用于获取手机中已经安装的app的所有信息，包括：包名、图标、应用名、签名、缓存大小
  */
 
 public class AppInfoEngine {
     private static final String TAG = "AppInfoEngine";
     private PackageManager packageManager;
     private Context mContext;
+    private CacheLoadFinish cacheLoadFinish;
     public AppInfoEngine(Context context) {
         packageManager = context.getPackageManager();
         mContext = context;
@@ -140,8 +142,10 @@ public class AppInfoEngine {
      * @return
      */
     public void getAllAppCacheSize(){
+        cacheLoadFinish = (CacheLoadFinish) mContext;
         appInfoList = new ArrayList<>();
         List<PackageInfo> installedPackages = packageManager.getInstalledPackages(0);
+        total = installedPackages.size();
         for (PackageInfo packageInfo : installedPackages) {
             //程序包名
             String packageName = packageInfo.packageName;
@@ -155,7 +159,8 @@ public class AppInfoEngine {
             }
         }
     }
-    List<AppInfo> appInfoList;
+    int i=0, total=0;
+    public List<AppInfo> appInfoList;
     private IPackageStatsObserver.Stub mStatsObserver = new IPackageStatsObserver.Stub() {
         @Override
         public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
@@ -163,24 +168,35 @@ public class AppInfoEngine {
             try {
                 if (cacheSize > 0){
                     AppInfo appInfo = new AppInfo();
+                    //获取包名
                     String packageName = pStats.packageName;
-                    PackageManager pm = packageManager;
+                    appInfo.setPackageName(packageName);
 
-                    ApplicationInfo applicationInfo = pm.getApplicationInfo(packageName, 0);
+                    ApplicationInfo applicationInfo = packageManager.getApplicationInfo(packageName, 0);
                     //获取应用图标
                     Drawable icon = applicationInfo.loadIcon(packageManager);
                     appInfo.setIcon(icon);
                     //获取应用名称
                     String appName = applicationInfo.loadLabel(packageManager).toString();
                     appInfo.setName(appName);
+                    //格式化缓存信息
                     String cache = TextFormater.getDataSize(cacheSize);
                     appInfo.setCacheSize(cache);
 
                     appInfoList.add(appInfo);
+                    Log.d(TAG, "i=" + i + ",total=" + total);
+                }
+                i++;
+                if (i == total){
+                    cacheLoadFinish.cacheLoadFinish();
                 }
             }catch (Exception e){
+                i++;
                 e.printStackTrace();
             }
         }
     };
+    public interface CacheLoadFinish{
+        void cacheLoadFinish();
+    }
 }

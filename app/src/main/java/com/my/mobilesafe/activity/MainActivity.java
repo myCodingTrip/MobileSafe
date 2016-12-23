@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.mobilesafe.R;
+import com.my.mobilesafe.activity.cache.CleanCacheActivity;
 import com.my.mobilesafe.activity.communication.CommunicationDefenderActivity;
 import com.my.mobilesafe.activity.traffic_manager.TrafficManagerActivity;
 import com.my.mobilesafe.activity.kill_virus.KillVirusActivity;
@@ -120,15 +121,14 @@ public class MainActivity extends BaseActivity {
                 case 5://手机杀毒
                     startActivity(new Intent(getApplicationContext(), KillVirusActivity.class));
                     break;
-                case 6:
-
+                case 6://缓存清理
+                    startActivity(new Intent(getApplicationContext(), CleanCacheActivity.class));
                     break;
                 case 7://高级工具
                     startActivity(new Intent(getApplicationContext(), ToolActivity.class));
                     break;
                 case 8://设置中心
-                    Intent settingIntent = new Intent(getApplicationContext(), SettingCenterActivity.class);
-                    startActivity(settingIntent);
+                    startActivity(new Intent(getApplicationContext(), SettingCenterActivity.class));
                     break;
             }
         }
