@@ -1,4 +1,4 @@
-package com.my.mobilesafe.activity.communication;
+package com.my.mobilesafe.activity.black_num;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class CommunicationDefenderActivity extends AppCompatActivity {
+public class BlackNumActivity extends AppCompatActivity {
     String TAG = "CommProActivity";
     BlackNumberDao dao;
     @InjectView(R.id.lv_black_list)
@@ -152,6 +152,7 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
                 break;
             case R.id.btn_clear:
                 //TODO 耗时，添加多线程
+                
                 dao.deleteAll();
                 numbers = dao.queryAll();
                 adapter.notifyDataSetChanged();
@@ -287,7 +288,7 @@ public class CommunicationDefenderActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //不能传入getApplicationContext()
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(CommunicationDefenderActivity.this);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(BlackNumActivity.this);
                     builder.setTitle("确认删除");
 
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
